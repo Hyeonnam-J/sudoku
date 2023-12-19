@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/layout-default">
+      
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" href="css/face.css" >
+	</th:block>
+      
+	<div layout:fragment="content" class='wrap'>		
+		<section>
+			<div id="magicMirror">
+				<p>
+					본격, 빅 데이터 기반 통계적 수치로 응답하는<br> 
+					21세기형 최첨단 마법 거울 !<br>
+					판별에 기반되는 그 데이터 수가 무려 스무 개 ! ...(?)
+					<br><br>
+					내장된 웹캠이 있어야 합니다<br>
+					워낙 빅 데이터라 거울을 꺼내는 데 조금 시간이 걸려요~
+				</p>
+				<img src='imgs/magicMirror.png'>
+			</div>
+			<div id="btns">
+				<button type="button" onclick="init()">마법 거울을 꺼낸다</button>
+				<button type="button" onclick="showYourScore()">거울아 거울아 세상에서 누가 제일 예쁘니?</button>
+				<button type="button" onclick="exit()">마법 거울을 갖다 던진다</button>
+			</div>
+			<div id="webcam-container"></div>
+			<div id="label-container"></div>
+			
+<!-- 			아래 두 스크립트는 html 태그 바로 위로 옮기면 동작을 안 하는데... -->
+			<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+			<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+		</section>
+	</div>
+	
+	<th:block layout:fragment="script">
+		<script src='js/face.js'></script>
+	</th:block>
+</html>
