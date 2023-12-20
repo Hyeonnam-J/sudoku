@@ -33,14 +33,6 @@ document.addEventListener('DOMContentLoaded', function () {
 function checkingResumeData() {
     let hasData = false;
 
-    // if(typeof AndroidInterface !== 'undefined' || AndroidInterface !== null){ // 안드로이드 유저면,
-    //   const savedData = AndroidInterface.getSavedPlayerInfo();
-    //   const parsedData = JSON.parse(savedData);
-    //   hasData = parsedData.hasData;
-    // }else{  // 웹 유저면,
-    //   hasData = localStorage.getItem("hasData");
-    // }
-
     hasData = localStorage.getItem("hasData");
     if (!hasData) return;
 
@@ -66,12 +58,6 @@ function loadAudio() {
 let selectedDifficulty = null;
 let isCellAnimating = false;
 
-document.getElementById('gameExit').addEventListener('click', function () {
-    playSound(button_sound);
-    showConfirmPopup('Do you want to exit this page?');
-    setConfirmHandler(exitPage);
-});
-
 class SudokuData {
     constructor(question, answer) {
         this.question = question;
@@ -83,29 +69,6 @@ class SudokuData {
 document.getElementById('resume').addEventListener('click', function () {
     document.getElementById("sudoku-main").style.display = "none";
     document.getElementById("sudoku-play").style.display = "flex";
-    /* 
-    AndroidInterface.isSaveTrue();
-  
-    // AndroidInterface라는 이름으로 등록된 인터페이스를 사용하여 
-    // 안드로이드 앱의 getSavedPlayerInfo 메서드를 호출.
-    const savedData = AndroidInterface.getSavedPlayerInfo();
-    const parsedData = JSON.parse(savedData);
-  
-    // gData는 자바스크립트에서 객체로 정의되어 있고 JSON 형식의 문자열로 저장되어 있지만
-    // helpLimit은 일반 문자열로 저장되어 있어서,
-    // 두 변수가 안드로이드에 저장되었다가 다시 리턴되었을 때 처리 방식이 다르다.
-    helpLimit = parsedData.helpLimit;
-    document.getElementById('helpLimit').innerText = helpLimit;
-  
-    const jsonGData = parsedData.gData;
-    const parseGData = JSON.parse(jsonGData); // json 타입인 jsonGData를 다시 자바스크립트 객체로 바꿔준다.
-    gData = parseGData;
-  
-    const tableHtml = parsedData.tableHtml; // 얘는 json 파싱할 필요 없이 문자열 그대로 삽입할 거니까.
-    const tbody = document.querySelector('#sudoku-table tbody');
-    tbody.innerHTML = '';
-    tbody.innerHTML = tableHtml;
-    */
 
     helpLimit = localStorage.getItem('helpLimit');
     document.getElementById('helpLimit').innerText = helpLimit;
@@ -147,11 +110,6 @@ document.getElementById('difficultyPopup-choose').addEventListener('click', func
     document.getElementById("sudoku-play").style.display = "flex";
 
     resetGame(selectedDifficulty);
-
-    // 게임 시작 전, 안드로이드 유저면 게임 저장이 가능하도록 안드로이드 내부 저장 플래그 변수를 수정.
-    // if(typeof AndroidInterface !== 'undefined' && AndroidInterface !== null) {
-    //   AndroidInterface.isSaveTrue();
-    // }
 });
 
 /* main ↑ */
@@ -513,27 +471,8 @@ document.getElementById('confirmPopup-ok').addEventListener('click', function ()
 // 현재 #confirmPopup-confirm 버튼에 추가된 이벤트 핸들러 즉 함수를 참조하는 변수. 한마디로 함수.
 let currentConfirmHandler;
 
-function exitPage() {
-    window.close();
-
-    // 안드로이드를 통한 유저가 아니면 즉 웹 유저면,
-    // if(typeof AndroidInterface === 'undefined' || AndroidInterface === null) {
-    //   window.close();
-    // }
-
-    // 안드로이드 유저면,
-    // AndroidInterface.gameExit();
-}
-
 function backToMainHandler() {
     confirm_sound.play();
-
-    // 뒤로가기 눌렀을 때 안드로이드 유저면 안드로이드 로직 실행. 
-    // 안드로이드의 경우 그 밑의 로직이 콜백에서 실행되어야 하니 리턴으로 함수 종료.
-    // if(typeof AndroidInterface !== 'undefined' && AndroidInterface !== null){
-    //   AndroidInterface.temporaryStorage(true);
-    //   return;
-    // }
 
     localStorage.setItem("tableHtml", document.querySelector('#sudoku-table tbody').innerHTML);
     localStorage.setItem("gData", gData);
@@ -549,24 +488,6 @@ function backToMainHandler() {
         resumeElement.classList.remove('notActivityBtn');
     }
 }
-
-// 안드로이드용 콜백 메서드.
-// back 버튼을 눌러 이전 화면을 보여주기 전에 데이터 저장이 완료되어야 한다.
-// function backToMainHandler_callback(){
-//   document.getElementById("sudoku-main").style.display = "flex";
-//   document.getElementById("sudoku-play").style.display = "none";
-//   document.getElementById('confirmPopup').style.display = 'none';
-
-//   const savedData = AndroidInterface.getSavedPlayerInfo();
-//   const parsedData = JSON.parse(savedData);
-//   const hasData = parsedData.hasData;
-//   if(hasData) {
-//     const resumeElement = document.getElementById('resume');
-//     if (resumeElement.classList.contains('notActivityBtn')) {
-//       resumeElement.classList.remove('notActivityBtn');
-//     }
-//   }
-// }
 
 function helpAnswerHandler() {
     help_sound.play();
