@@ -88,6 +88,10 @@ document.getElementById('newGame').addEventListener('click', function () {
     document.getElementById('difficultyPopup').style.display = 'flex';
 });
 
+document.getElementById('exit').addEventListener('click', function(){
+    alert('not work in web');
+})
+
 document.getElementById('difficultyPopup-cancel').addEventListener('click', function () {
     playSound(cancel_sound);
     document.getElementById('difficultyPopup').style.display = 'none';
