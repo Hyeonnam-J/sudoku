@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class SudokuGenerator {
-  private static final int SIZE = 9;
+    private static final int SIZE = 9;
     private int[][] originBoard = new int[SIZE][SIZE];
     private int[][] board = new int[SIZE][SIZE];
     private int[][] row = new int[SIZE+1][SIZE+1];
@@ -22,11 +22,13 @@ public class SudokuGenerator {
         sudokuGenerator.boardInit();
         sudokuGenerator.makeSudoku(0);
         int[][] answer = copyBoard(sudokuGenerator.board);
-        // sudokuGenerator.printBoard();
+        System.out.println("answer ========================");
+        sudokuGenerator.printBoard();
 
         sudokuGenerator.removeNumbersFromBoard(numToKeep);
         int[][] question = copyBoard(sudokuGenerator.board);
-        // sudokuGenerator.printBoard();
+        System.out.println("question ======================");
+        sudokuGenerator.printBoard();
 
         /**
          * ForkJoinPool 병렬 처리 도입 외에 성능을 더 향상할 방법은 딱히...
@@ -268,7 +270,6 @@ public class SudokuGenerator {
     }
 
     public void printBoard() {
-        System.out.println(Arrays.toString(board[0]));
         for (int i = 0; i < SIZE; i++) {
             System.out.println(Arrays.toString(board[i]));
 

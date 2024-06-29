@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.sudoku.SudokuGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,5 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MyWebApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MyWebApplication.class, args);
+
+		new SudokuGenerator().generate(30);
 	}
 }
