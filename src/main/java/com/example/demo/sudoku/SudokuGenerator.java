@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class SudokuGenerator {
-    private static final int SIZE = 9;
+    private final int SIZE = 9;
     private int[][] originBoard = new int[SIZE][SIZE];
     private int[][] board = new int[SIZE][SIZE];
     private int[][] row = new int[SIZE+1][SIZE+1];
@@ -149,7 +149,7 @@ public class SudokuGenerator {
         backtrackingRemove(numToRemove, allPositions);
     }   // removeNumbersFromBoard
 
-    private static class Position {
+    private class Position {
         int x, y;
         Position(int x, int y) {
             this.x = x;
